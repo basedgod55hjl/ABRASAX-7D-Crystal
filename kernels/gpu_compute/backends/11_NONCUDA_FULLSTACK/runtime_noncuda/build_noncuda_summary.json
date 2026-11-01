@@ -1,0 +1,49 @@
+{
+  "stack_root": "C:\\Users\\BASEDGOD\\Desktop\\ABRASAX-AGI-MAIN\\noncuda_fullstack",
+  "model_lock": "essentialai/rnj-1",
+  "lm_studio_base": "http://127.0.0.1:1234",
+  "results": [
+    {
+      "command": "\"C:\\Program Files\\Python311\\python.exe\" --version",
+      "returncode": 0,
+      "stdout": "Python 3.11.9",
+      "stderr": ""
+    },
+    {
+      "command": "cargo --version",
+      "returncode": 0,
+      "stdout": "cargo 1.92.0 (344c4567c 2025-10-21)",
+      "stderr": ""
+    },
+    {
+      "command": "cmake --version",
+      "returncode": 0,
+      "stdout": "cmake version 4.1.1\n\nCMake suite maintained and supported by Kitware (kitware.com/cmake).",
+      "stderr": ""
+    },
+    {
+      "command": "\"C:\\Program Files\\Python311\\python.exe\" -c \"import yaml, numpy, psutil; print('python_deps_ok')\"",
+      "returncode": 0,
+      "stdout": "python_deps_ok",
+      "stderr": ""
+    },
+    {
+      "command": "cmake -S . -B build -DCMAKE_BUILD_TYPE=Release",
+      "returncode": 0,
+      "stdout": "-- Building for: Visual Studio 17 2022\n-- Selecting Windows SDK version 10.0.26100.0 to target Windows 10.0.26200.\n-- The CXX compiler identification is MSVC 19.44.35222.0\n-- Detecting CXX compiler ABI info\n-- Detecting CXX compiler ABI info - done\n-- Check for working CXX compiler: C:/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/VC/Tools/MSVC/14.44.35207/bin/Hostx64/x64/cl.exe - skipped\n-- Detecting CXX compile features\n-- Detecting CXX compile features - done\n-- Configuring done (11.1s)\n-- Generating done (0.1s)\n-- Build files have been written to: C:/Users/BASEDGOD/Desktop/ABRASAX-AGI-MAIN/noncuda_fullstack/kernel/cpp/build",
+      "stderr": "CMake Warning:\n  Manually-specified variables were not used by the project:\n\n    CMAKE_BUILD_TYPE"
+    },
+    {
+      "command": "cmake --build build -j",
+      "returncode": 0,
+      "stdout": "MSBuild version 17.14.23+b0019275e for .NET Framework\n\n  1>Checking Build System\n  Building Custom Rule C:/Users/BASEDGOD/Desktop/ABRASAX-AGI-MAIN/noncuda_fullstack/kernel/cpp/CMakeLists.txt\n  backend_bridge.cpp\n     Creating library C:/Users/BASEDGOD/Desktop/ABRASAX-AGI-MAIN/noncuda_fullstack/kernel/cpp/build/Debug/noncuda_backend_bridge.lib and object C:/Users/BASEDGOD/Desktop/ABRASAX-AGI-MAIN/noncuda_fullstack/kernel/cpp/build/Debug/noncuda_backend_bridge.exp\n  noncuda_backend_bridge.vcxproj -> C:\\Users\\BASEDGOD\\Desktop\\ABRASAX-AGI-MAIN\\noncuda_fullstack\\kernel\\cpp\\build\\Debug\\noncuda_backend_bridge.dll\n  Building Custom Rule C:/Users/BASEDGOD/Desktop/ABRASAX-AGI-MAIN/noncuda_fullstack/kernel/cpp/CMakeLists.txt",
+      "stderr": ""
+    },
+    {
+      "command": "cargo build --release",
+      "returncode": 0,
+      "stdout": "",
+      "stderr": "Updating crates.io index\n     Locking 11 packages to latest compatible versions\n Downloading crates ...\n  Downloaded zmij v1.0.21\n  Downloaded unicode-ident v1.0.23\n  Downloaded memchr v2.8.0\n  Downloaded syn v2.0.115\n   Compiling proc-macro2 v1.0.106\n   Compiling quote v1.0.44\n   Compiling unicode-ident v1.0.23\n   Compiling serde_core v1.0.228\n   Compiling zmij v1.0.21\n   Compiling serde_json v1.0.149\n   Compiling serde v1.0.228\n   Compiling itoa v1.0.17\n   Compiling memchr v2.8.0\n   Compiling syn v2.0.115\n   Compiling serde_derive v1.0.228\n   Compiling noncuda_kernel_core v0.1.0 (C:\\Users\\BASEDGOD\\Desktop\\ABRASAX-AGI-MAIN\\noncuda_fullstack\\kernel\\rust)\n    Finished `release` profile [optimized] target(s) in 40.87s"
+    }
+  ]
+}

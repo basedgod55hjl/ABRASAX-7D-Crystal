@@ -1,0 +1,58 @@
+# ABRASAX-7D-Crystal -- never publish build output, runtime state, or secrets.
+#
+# Why this file exists: the published tree carried 2913 blobs / 573.8 MB, and
+# 470 MB of that was Rust build output committed by accident --
+#   .pdb   184.2 MB (106 files)
+#   .rmeta 180.9 MB (220 files)
+#   .rlib  110.8 MB (77 files)
+# plus 47.5 MB of .dll and 25.8 MB of .exe. Nothing here needs to be in git.
+#
+# Deliberately NOT ignored: cuda/build/ and kernels/cuda/build/. Those hold the
+# .ptx/.cubin/.dll artifacts that cuda_kernel_loader.py loads at runtime, and
+# kernels/cuda/test_kernel_loader.py proves 19/19 kernels bind from them on the
+# GTX 1660 Ti. They are shipped compiled because the build needs nvcc.
+
+# ---- rust build output ----
+target/
+**/target/
+*.rlib
+*.rmeta
+*.pdb
+*.d
+
+# ---- MSVC link intermediates (not the shipped .dll/.lib) ----
+*.obj
+*.exp
+*.ilk
+
+# ---- python ----
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+
+# ---- runtime state: 205 checkpoints written on a timer, none belong here ----
+CRYSTAL/
+logs/
+*.log
+*.jsonl
+
+# ---- vendored environments: declare dependencies, do not commit them ----
+.venv/
+**/.venv/
+
+# ---- credentials ----
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.pfx
+**/secrets/**
+**/credentials*.json
+_keys_probe.json
+
+# ---- os noise ----
+Thumbs.db
+desktop.ini
+.DS_Store
