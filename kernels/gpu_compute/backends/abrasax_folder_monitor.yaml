@@ -1,0 +1,161 @@
+# ============================================================================
+# ABRASAX — Unified Xenoliving System
+# PRIMAL_HEX: 4f5349524953424c58434b | phi: 1.618033988749895
+# CREATOR: Sir Charles Spikes (BASEDGOD)
+# ============================================================================
+
+# ABRASAX — gpu_compute/backends folder monitor + GPU/LLM control surface (single file)
+# Paths: Windows; consumers should resolve env overrides (LOCAL_LLM_URL, CUDA_VISIBLE_DEVICES, etc.).
+
+name: 12_GPU_COMPUTE_monitor
+version: '2.8'
+watch: true
+auto_fix: true
+loki_enabled: true
+datadog_enabled: true
+agent_pool: 50
+model: google/gemma-4-e4b-uncensored-hauhaucs-aggressive
+
+# --- Full tree: watch backends + k8s + LLM_ENGINE mythos + notebook corpus (read-only assets) ---
+# notebook_output/extracted_scripts: use existing files only; catalog = MASTER_NOTEBOOK_INDEX.md (do not add generators here).
+watch_roots:
+  - 'C:\Users\BASEDGOD\ABRASAX\gpu_compute\backends'
+  - 'C:\Users\BASEDGOD\ABRASAX\k8s'
+  - 'C:\Users\BASEDGOD\ABRASAX\LLM_ENGINE\mythos'
+  - 'C:\Users\BASEDGOD\ABRASAX\LLM_ENGINE\notebook_output'
+  - 'C:\Users\BASEDGOD\ABRASAX\src\services'
+include_globs:
+  - '**/*'
+exclude_globs: []
+
+# --- All Python bytecode: track every .pyc under __pycache__ (hash/size in monitor logs) ---
+bytecode:
+  track_all_pyc: true
+  globs:
+    - '**/__pycache__/**/*.pyc'
+    - '**/*.pyc'
+  on_stale_with_source_change: rescan
+  purge_on_auto_fix: false
+
+# --- Start / load order: all primary configs + launchers for this stack (run in order) ---
+startup:
+  config_paths:
+    - 'C:\Users\BASEDGOD\ABRASAX\gpu_compute\backends\cbm_system\performance_config.json'
+    - 'C:\Users\BASEDGOD\ABRASAX\gpu_compute\backends\abrasax_folder_monitor.yaml'
+    - 'C:\Users\BASEDGOD\ABRASAX\gpu_compute\backends\10_GPU_RUST\GEMMA_MODEL_INFO.md'
+    - 'C:\Users\BASEDGOD\ABRASAX\gpu_compute\backends\02_NVIDIA_DEBUG\nvidia-smi.json'
+    - 'C:\Users\BASEDGOD\ABRASAX\gpu_compute\backends\VIDEO_ENHANCE\vlc_enhanced_preset.json'
+    - 'C:\Users\BASEDGOD\ABRASAX\gpu_compute\backends\11_NONCUDA_FULLSTACK\noncuda_fullstack\config\stack.yaml'
+    - 'C:\Users\BASEDGOD\ABRASAX\k8s\kustomization.yaml'
+    - 'C:\Users\BASEDGOD\ABRASAX\k8s\namespace.yaml'
+    - 'C:\Users\BASEDGOD\ABRASAX\k8s\agent-zero-deployment.yaml'
+    - 'C:\Users\BASEDGOD\ABRASAX\k8s\mcp-gateway-deployment.yaml'
+    - 'C:\Users\BASEDGOD\ABRASAX\k8s\mcp-gateway-fixed.yaml'
+    - 'C:\Users\BASEDGOD\ABRASAX\k8s\notebooklm-mcp-deployment.yaml'
+    - 'C:\Users\BASEDGOD\ABRASAX\k8s\telegram-config.yaml'
+    - 'C:\Users\BASEDGOD\ABRASAX\k8s\telegram-secrets.example.yaml'
+    - 'C:\Users\BASEDGOD\ABRASAX\LLM_ENGINE\notebook_output\MASTER_NOTEBOOK_INDEX.md'
+    - 'C:\Users\BASEDGOD\ABRASAX\LLM_ENGINE\run_full_automation.ps1'
+    - 'C:\Users\BASEDGOD\ABRASAX\LLM_ENGINE\sovereign_prompt.md'
+    - 'C:\Users\BASEDGOD\ABRASAX\LLM_ENGINE\VRAM_LLM_Daemon.py'
+    - 'C:\Users\BASEDGOD\ABRASAX\OBSIDIAN_NEURAL_OS\autoresearch\.github\workflows\abrasax_swarm_agent.yml'
+    - 'C:\Users\BASEDGOD\ABRASAX\OBSIDIAN_NEURAL_OS\github_manager.py'
+    - 'C:\Users\BASEDGOD\ABRASAX\ABRASAX_SOVEREIGN_NEXUS.py'
+    - 'C:\Users\BASEDGOD\ABRASAX\README.md'
+    - 'C:\Users\BASEDGOD\ABRASAX\start_all_cloud_agents.py'
+    - 'C:\Users\BASEDGOD\ABRASAX\start_all_gemma_agents.ps1'
+    - 'C:\Users\BASEDGOD\ABRASAX\start_gemma_abrasax.py'
+    - 'C:\Users\BASEDGOD\ABRASAX\server.js'
+    - 'C:\Users\BASEDGOD\ABRASAX\bootstrap_lm_studio_gateways.ps1'
+    - 'C:\Users\BASEDGOD\ABRASAX\start_full_system.bat'
+    - 'C:\Users\BASEDGOD\ABRASAX\LM_STUDIO_SETUP.md'
+    - 'C:\Users\BASEDGOD\ABRASAX\src\services\integration_layer\clawdbot\README.md'
+    - 'C:\Users\BASEDGOD\ABRASAX\src\services\agent_coordinator.py'
+    - 'C:\Users\BASEDGOD\ABRASAX\src\services\data_ingestion.py'
+    - 'C:\Users\BASEDGOD\ABRASAX\src\services\integration_layer\README.md'
+  run_after_config:
+    - 'C:\Users\BASEDGOD\ABRASAX\gpu_compute\backends\10_GPU_RUST\gpu_launch.bat'
+    - 'C:\Users\BASEDGOD\ABRASAX\gpu_compute\backends\03_CUDA_TOOLS\cuda_load_balancer.py'
+  # One-shot: verify configs, gpu_launch, cuda balancer, GET /v1/models, POST chat smoke
+  run_all_here:
+    working_directory: 'C:\Users\BASEDGOD\ABRASAX\gpu_compute\backends'
+    powershell: '.\start_all.ps1'
+  run_k8s_tests:
+    working_directory: 'C:\Users\BASEDGOD\ABRASAX\k8s'
+    powershell: '.\test_k8s.ps1'
+  # GitHub: token check only in start_all; full repo sync: python OBSIDIAN_NEURAL_OS\github_manager.py
+  github_manager:
+    script: 'C:\Users\BASEDGOD\ABRASAX\OBSIDIAN_NEURAL_OS\github_manager.py'
+    start_all_step: 'python github_manager.py --test'
+  # ABRASAX Nexus: full swarm — use --dry-run in start_all; live: python ABRASAX_SOVEREIGN_NEXUS.py
+  sovereign_nexus:
+    script: 'C:\Users\BASEDGOD\ABRASAX\ABRASAX_SOVEREIGN_NEXUS.py'
+    start_all_step: 'python ABRASAX_SOVEREIGN_NEXUS.py --dry-run'
+
+# --- Full GPU pin: single device, max layers, same knobs as performance_config llm_controls.inference ---
+gpu_full_pin:
+  enabled: true
+  cuda_visible_devices: '0'
+  performance_config: 'C:\Users\BASEDGOD\ABRASAX\gpu_compute\backends\cbm_system\performance_config.json'
+  priority_compute_apps:
+    - 'LM Studio.exe'
+    - 'lms.exe'
+    - 'Cursor.exe'
+    - 'Antigravity.exe'
+    - 'python.exe'
+  inference:
+    num_gpu_layers: 999
+    num_ctx: 8192
+    num_thread: 16
+    nvidia_vram_cap_gb: 0
+  env:
+    CUDA_VISIBLE_DEVICES: '0'
+    CUDA_LAUNCH_BLOCKING: '0'
+    CUDA_CACHE_MAXSIZE: '2147483647'
+
+# --- LLM: stats / discovery (GET all); chat uses POST /v1/chat/completions ---
+# Source of truth: edit gpu_compute/backends/cbm_system/performance_config.json (llm_controls); keep URLs/models in sync below.
+llm_controls_ref: 'C:\Users\BASEDGOD\ABRASAX\gpu_compute\backends\cbm_system\performance_config.json'
+llm:
+  base_url: 'http://169.254.83.107:1234/v1'
+  models:
+    - 'google/gemma-4-e4b-uncensored-hauhaucs-aggressive'
+    - 'text-embedding-nomic-embed-text-v1.5'
+  stat_all:
+    - name: models_list
+      method: GET
+      url: 'http://169.254.83.107:1234/v1/models'
+      note: Lists all served model ids (e.g. gemma + embedding).
+  smoke_chat:
+    method: POST
+    url: 'http://169.254.83.107:1234/v1/chat/completions'
+    body_hint:
+      model: google/gemma-4-e4b-uncensored-hauhaucs-aggressive
+      messages:
+        - role: user
+          content: ping
+
+# --- LLM_ENGINE asset roots (existing files only under extracted_scripts) ---
+llm_engine:
+  mythos: 'C:\Users\BASEDGOD\ABRASAX\LLM_ENGINE\mythos'
+  notebook_extracted_scripts: 'C:\Users\BASEDGOD\ABRASAX\LLM_ENGINE\notebook_output\extracted_scripts'
+  notebook_master_index: 'C:\Users\BASEDGOD\ABRASAX\LLM_ENGINE\notebook_output\MASTER_NOTEBOOK_INDEX.md'
+  gpu_cpu_control: 'C:\Users\BASEDGOD\ABRASAX\LLM_ENGINE\tools\gpu_cpu_control.py'
+  run_full_automation: 'C:\Users\BASEDGOD\ABRASAX\LLM_ENGINE\run_full_automation.ps1'
+  sovereign_prompt: 'C:\Users\BASEDGOD\ABRASAX\LLM_ENGINE\sovereign_prompt.md'
+  vram_llm_daemon: 'C:\Users\BASEDGOD\ABRASAX\LLM_ENGINE\VRAM_LLM_Daemon.py'
+  abrasax_swarm_workflow: 'C:\Users\BASEDGOD\ABRASAX\OBSIDIAN_NEURAL_OS\autoresearch\.github\workflows\abrasax_swarm_agent.yml'
+  github_manager: 'C:\Users\BASEDGOD\ABRASAX\OBSIDIAN_NEURAL_OS\github_manager.py'
+  sovereign_nexus: 'C:\Users\BASEDGOD\ABRASAX\ABRASAX_SOVEREIGN_NEXUS.py'
+  readme: 'C:\Users\BASEDGOD\ABRASAX\README.md'
+  start_all_cloud_agents: 'C:\Users\BASEDGOD\ABRASAX\start_all_cloud_agents.py'
+  start_all_gemma_agents: 'C:\Users\BASEDGOD\ABRASAX\start_all_gemma_agents.ps1'
+  start_gemma_abrasax: 'C:\Users\BASEDGOD\ABRASAX\start_gemma_abrasax.py'
+  gpu_backends_start_all: 'C:\Users\BASEDGOD\ABRASAX\gpu_compute\backends\start_all.ps1'
+  server_js: 'C:\Users\BASEDGOD\ABRASAX\server.js'
+  bootstrap_lm_studio_gateways: 'C:\Users\BASEDGOD\ABRASAX\bootstrap_lm_studio_gateways.ps1'
+  start_full_system_bat: 'C:\Users\BASEDGOD\ABRASAX\start_full_system.bat'
+  lm_studio_setup: 'C:\Users\BASEDGOD\ABRASAX\LM_STUDIO_SETUP.md'
+  clawdbot_readme: 'C:\Users\BASEDGOD\ABRASAX\src\services\integration_layer\clawdbot\README.md'
+  src_services_root: 'C:\Users\BASEDGOD\ABRASAX\src\services'
+  src_services_integration_readme: 'C:\Users\BASEDGOD\ABRASAX\src\services\integration_layer\README.md'

@@ -1,0 +1,58 @@
+{
+    "gpu_task_mapping": {
+        "high_perf_apps": [
+            "LM Studio.exe",
+            "lms.exe",
+            "Cursor.exe",
+            "Antigravity.exe",
+            "python.exe",
+            "vlc.exe"
+        ],
+        "offload_apps": []
+    },
+    "llm_controls": {
+        "base_url": "http://169.254.83.107:1234/v1",
+        "base_urls": [
+            "http://127.0.0.1:1234/v1",
+            "http://localhost:1234/v1",
+            "http://169.254.83.107:1234/v1"
+        ],
+        "model": "google/gemma-4-e4b-uncensored-hauhaucs-aggressive",
+        "embedding_model": "text-embedding-nomic-embed-text-v1.5",
+        "lm_studio_rest_note": "Native REST: POST host:port/api/v1/chat (not /v1/chat/completions). Optional MCP: set env ABRASAX_LM_REST_MCP_CHAT=1 when running start_all.ps1 step 5d.",
+        "profile_path": "C:\\Users\\BASEDGOD\\ABRASAX\\gpu_compute\\backends\\cbm_system\\performance_config.json",
+        "reflect_logs": true,
+        "nonstop_assistant": true,
+        "nonstop_note": "Continuous local assistant: run start_gemma_abrasax.py or .\\start_all_gemma_agents.ps1 (LM Studio + Gemma loaded). Cloud/GitHub swarm: python start_all_cloud_agents.py (GITHUB_TOKEN).",
+        "gemma4_full_control": true,
+        "gemma4_full_control_note": "When google/gemma-4-e4b-uncensored-hauhaucs-aggressive is loaded in LM Studio, set ABRASAX_GEMMA4_FULL_CONTROL=1 (see launchers) for full local capability: tools, shell, file access, OpenAI-compatible chat/completions.",
+        "vision": true,
+        "inference": {
+            "num_ctx": 8192,
+            "num_gpu_layers": 999,
+            "num_thread": 16,
+            "nvidia_vram_cap_gb": 0
+        }
+    },
+    "resource_monitor": {
+        "enhanced_startup": true,
+        "track_cpu_percent": true,
+        "track_system_ram_mb": true,
+        "track_igpu_adapter": true,
+        "track_nvidia_vram": true,
+        "embedding_full_batch": true,
+        "embedding_batch_lines": 8,
+        "gemma_advisor_after_embed": true,
+        "cpu_soft_warn_percent": 85,
+        "nvidia_vram_warn_percent": 90,
+        "note": "start_all.ps1 logs snapshot to %TEMP%\\ABRASAX_resource_snapshot.json. Offload: populate gpu_task_mapping.offload_apps; LM Studio assigns models per GPU. iGPU name from WMI only (no util on all drivers).",
+        "auto_fix_connectivity": true,
+        "auto_fix_note": "start_all.ps1: if base_url is 169.254.* link-local, tries 127.0.0.1 and localhost before link-local for POST (chat/embed/advisor) to avoid stalls; GET /models uses same order. Otherwise primary first. enforce_amd_mapping.ps1 is optional log hook from cuda_load_balancer."
+    },
+    "abr_integration": {
+        "brain_store": "runtime/gemma_adaptive/brain_store.jsonl",
+        "loki_grafana_url": "http://127.0.0.1:3100",
+        "genkit_gateway_url": "http://127.0.0.1:8811",
+        "note": "brain_store: append-only JSONL for long-term snippets Gemma/agents can read. loki_grafana_url: Grafana Loki (logs); set LOKI_URL in .env to override. loki_dev_loop + bridge_to_loki use GENKIT_GATEWAY_URL (genkit_gateway_url). Run stack: python start_gemma_abrasax.py (daemons include Loki dev loop when not --skip-daemons), or agents_hub.global_daemons --full-stack."
+    }
+}

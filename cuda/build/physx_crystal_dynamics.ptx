@@ -1,0 +1,3 @@
+// ABRASAX PhysX Crystal Dynamics — PTX stub
+.version 7.5
+.target sm_75

@@ -1,0 +1,18 @@
+{
+  "nvidia_smi_log": {
+    "driver_version": "591.74",
+    "cuda_version": "13.1     |",
+    "gpu": [
+      {
+        "product_name": "NVIDIA GeForce GTX 1660 Ti",
+        "product_architecture": "NVIDIA",
+        "fb_memory_usage": {
+          "total": "6144 MiB"
+        },
+        "pci": {
+          "pci_bus_id": "00000000:01:00.0"
+        }
+      }
+    ]
+  }
+}
