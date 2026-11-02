@@ -17,7 +17,7 @@
             "http://localhost:1234/v1",
             "http://169.254.83.107:1234/v1"
         ],
-        "model": "google/gemma-4-e4b-uncensored-hauhaucs-aggressive",
+        "model": "gemma-4-e2b-uncensored-hauhaucs-aggressive",
         "embedding_model": "text-embedding-nomic-embed-text-v1.5",
         "lm_studio_rest_note": "Native REST: POST host:port/api/v1/chat (not /v1/chat/completions). Optional MCP: set env ABRASAX_LM_REST_MCP_CHAT=1 when running start_all.ps1 step 5d.",
         "profile_path": "C:\\Users\\BASEDGOD\\ABRASAX\\gpu_compute\\backends\\cbm_system\\performance_config.json",
@@ -25,7 +25,7 @@
         "nonstop_assistant": true,
         "nonstop_note": "Continuous local assistant: run start_gemma_abrasax.py or .\\start_all_gemma_agents.ps1 (LM Studio + Gemma loaded). Cloud/GitHub swarm: python start_all_cloud_agents.py (GITHUB_TOKEN).",
         "gemma4_full_control": true,
-        "gemma4_full_control_note": "When google/gemma-4-e4b-uncensored-hauhaucs-aggressive is loaded in LM Studio, set ABRASAX_GEMMA4_FULL_CONTROL=1 (see launchers) for full local capability: tools, shell, file access, OpenAI-compatible chat/completions.",
+        "gemma4_full_control_note": "When gemma-4-e2b-uncensored-hauhaucs-aggressive is loaded in LM Studio, set ABRASAX_GEMMA4_FULL_CONTROL=1 (see launchers) for full local capability: tools, shell, file access, OpenAI-compatible chat/completions.",
         "vision": true,
         "inference": {
             "num_ctx": 8192,

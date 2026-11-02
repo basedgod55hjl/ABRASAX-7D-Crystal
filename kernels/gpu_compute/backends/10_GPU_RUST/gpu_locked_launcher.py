@@ -60,7 +60,7 @@ def spawn_lm_studio(lm_exe_path: str):
     print("🚀 LAUNCHING LM STUDIO WITH MAXIMUM GPU OFFLOAD INSTRUCTIONS")
     print("="*60)
     print("🚨 VRAM LOCK REQUIRED 🚨")
-    print("To ensure `google/gemma-4-e4b-uncensored-hauhaucs-aggressive` stays exclusively on the GPU:")
+    print("To ensure `gemma-4-e2b-uncensored-hauhaucs-aggressive` stays exclusively on the GPU:")
     print("1. Open Settings -> Hardware / GPU Offload")
     print("2. Set GPU Layers to MAX (or manually use parameter: --n-gpu-layers 999)")
     print("3. Ensure 'CUDA' compute backend is explicitly selected.")

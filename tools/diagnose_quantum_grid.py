@@ -1,73 +1,170 @@
-"""Confirm the 8x64 quantum-evolution mismatch is a GRID BUG, not a bad reference.
+"""Quantum-evolution grid regression + forensic record of the GRID BUG.
 
-MEASURED 2026-11-01 by tools/verify_kernel_math_quantum.py:
-    quantum_evolution_2d 16x16  max_err 8.4e-08   OK
-    quantum_evolution_2d 32x32  max_err 7.9e-08   OK
-    quantum_evolution_2d  8x64  max_err 8.5e-01   FAIL
+THE BUG (real, fixed 2026-11-01 in kernels/cuda/cuda_kernel_loader.py):
 
-The kernel is correct; the launch dimensions are not. The kernel indexes
-    x = blockIdx.x * blockDim.x + threadIdx.x
-    y = blockIdx.y * blockDim.y + threadIdx.y
-with block = (BLOCK_SIZE_2D_X, BLOCK_SIZE_2D_Y) = (16, 16), and the loader
-launches with NO grid argument, so one block is dispatched. That covers
-x < 16 and y < 16 only.
+    _get_grid_block inferred a 2-D launch grid with a SQUARE assumption,
+        side = int(n ** 0.5)
+        grid = (ceil(side/16), ceil(side/16), 1)
+    so an 8x64 field (n=512) got side=22 -> a 2x2 grid: x covered 32 of 64
+    columns, so columns 32..63 were never written. Measured against the numpy
+    reference: max_err 8.348e-01 confined to columns 32..63, while columns
+    0..31 were exact at 6.8e-08. Not "one block dispatched" -- two blocks of 16
+    in x, and two rows in y that the 8-row field never used.
 
-  16x16  -> every element covered            -> exact (8e-08)
-  32x32  -> x,y < 16 only, but the default was
-            evidently large enough, or the
-            uncovered region was untouched     -> exact (7.9e-08)
-  8x64   -> height 8 fits, width 64 does NOT  -> columns 16..63 keep
-            whatever the output buffer held   -> 0.85 error
+    Square fields hid it: 16x16 -> side=16 -> (1,1,1) covers all; 32x32 ->
+    side=32 -> (2,2,1) covers all. Only non-square fields exposed it.
 
-This tool proves it by comparing element-by-element and showing WHERE the
-error lives: if the mismatch is confined to x >= 16 and y >= 16, the untested
-region is unbounded, and the fix is ceil-division grids.
+THE FIX: the caller passes first_array_shape=(h, w) and the grid is ceil
+division per axis, so 8x64 -> (4, 1, 1) with block (16, 16, 1).
 
-It also reports the correct expected value for the uncovered region so a future
-fix can be checked the same way.
+Two modes:
+
+    python diagnose_quantum_grid.py            regression -- every shape exact
+                                               AND the dispatched grid equals
+                                               the ceil division of that shape
+    python diagnose_quantum_grid.py --legacy   forensics -- load the pre-fix
+                                               loader (.bak-gridfix-20261101)
+                                               and reproduce 8.348e-01 with bad
+                                               columns exactly 32..63
+
+Exit 0 when the mode's assertions hold.
 """
 from __future__ import annotations
 
+import importlib.util
+import inspect
+import os
+import shutil
 import sys
-from pathlib import Path
 
 import numpy as np
 
-CUDA_DIR = Path(r"C:\abrasax\SYSTEMS\ABRASAX-7D-Crystal\kernels\cuda")
-sys.path.insert(0, str(CUDA_DIR))
+HERE = os.path.dirname(os.path.abspath(__file__))
+ROOT = os.path.dirname(HERE)
+CUDA_DIR = os.path.join(ROOT, "kernels", "cuda")
+LEGACY_LOADER = os.path.join(CUDA_DIR, "cuda_kernel_loader.py.bak-gridfix-20261101")
+STAGED_NAME = "_hist_probe_loader.py"
+BLOCK = (16, 16)
+SHAPES = [(16, 16), (32, 32), (8, 64), (64, 8), (5, 100)]
+TOL = 2e-5
 
-sys.path.insert(0, str(CUDA_DIR.parents[2] / "tools"))
+sys.path.insert(0, CUDA_DIR)
+sys.path.insert(0, HERE)
+
 from verify_kernel_math_quantum import ref_quantum_evolution  # noqa: E402
 
-BLOCK = (16, 16)
+
+def expected_grid(shape):
+    h, w = shape
+    return (-(-w // BLOCK[0]), -(-h // BLOCK[1]), 1)
 
 
-def main() -> int:
+def install_recorder(rt):
+    """Record the grid the loader actually dispatches, whatever its signature."""
+    recorder = []
+    original = rt._get_grid_block
+    params = inspect.signature(original).parameters
+
+    def wrapped(name, grid, block, n=None, shape=None):
+        kwargs = {}
+        if "n" in params:
+            kwargs["n"] = n
+        if "shape" in params:
+            kwargs["shape"] = shape
+        out = original(name, grid, block, **kwargs)
+        recorder.append(tuple(out[0]))
+        return out
+
+    rt._get_grid_block = wrapped
+    return recorder
+
+
+def run_shapes(rt, recorder, label, expect_ok):
+    rng = np.random.default_rng(1)
+    failures = []
+    print("\n== %s ==" % label)
+    for shape in SHAPES:
+        field = (rng.standard_normal(shape) * 0.5).astype(np.float32)
+        recorder.clear()
+        gpu = np.asarray(rt.quantum_evolution_2d(field.copy(), phase=0.3, dt=0.1),
+                         dtype=np.float64)
+        cpu = ref_quantum_evolution(field, 0.3, 0.1, toroidal=True)
+        err = float(np.abs(gpu - cpu).max())
+        grid = recorder[-1] if recorder else None
+        want = expected_grid(shape)
+        num_ok = err <= TOL
+        if not expect_ok:
+            num_ok = True  # forensics: we are documenting, not asserting
+        grid_ok = grid == want
+        print("  %-9s grid=%-12s want=%-12s max_err=%.3e  %s%s"
+              % ("%dx%d" % shape, grid, want, err,
+                 "OK" if num_ok else "FAIL",
+                 "" if grid_ok else "  GRID MISMATCH"))
+        if not (num_ok and grid_ok):
+            failures.append((shape, grid, want, err))
+    return failures
+
+
+def current_mode():
     from cuda_kernel_loader import CrystalKernelRuntime
 
     rt = CrystalKernelRuntime()
+    print("loader: %s" % sys.modules["cuda_kernel_loader"].__file__)
+    print("kernels bound: %d" % len(rt.available_kernels))
+    recorder = install_recorder(rt)
+    failures = run_shapes(rt, recorder, "current loader (regression)", True)
+    print("\n%d shape(s) failed" % len(failures))
+    for f in failures:
+        print("  ", f)
+    return 0 if not failures else 1
+
+
+def load_legacy():
+    staged = os.path.join(CUDA_DIR, STAGED_NAME)
+    try:
+        shutil.copy2(LEGACY_LOADER, staged)
+        spec = importlib.util.spec_from_file_location("legacy_loader", staged)
+        mod = importlib.util.module_from_spec(spec)
+        sys.modules["legacy_loader"] = mod
+        spec.loader.exec_module(mod)
+        rt = mod.CrystalKernelRuntime()
+    finally:
+        if os.path.exists(staged):
+            os.remove(staged)
+    return rt
+
+
+def legacy_mode():
+    if not os.path.exists(LEGACY_LOADER):
+        print("legacy loader missing: %s" % LEGACY_LOADER)
+        return 1
+    rt = load_legacy()
+    print("loader: %s" % LEGACY_LOADER)
+    print("kernels bound: %d" % len(rt.available_kernels))
+    recorder = install_recorder(rt)
+    run_shapes(rt, recorder, "pre-fix loader (forensics)", False)
+
     rng = np.random.default_rng(1)
     field = (rng.standard_normal((8, 64)) * 0.5).astype(np.float32)
+    gpu = np.asarray(rt.quantum_evolution_2d(field.copy(), phase=0.3, dt=0.1),
+                     dtype=np.float64)
     cpu = ref_quantum_evolution(field, 0.3, 0.1, toroidal=True)
-    gpu = rt.quantum_evolution_2d(field.copy(), phase=0.3, dt=0.1)
-    err = np.abs(np.asarray(gpu, np.float64) - cpu)
+    err = np.abs(gpu - cpu)
+    bad = [int(i) for i in np.nonzero(err.max(axis=0) > 1e-3)[0]]
+    max_err = float(err.max())
+    print("\n8x64 forensics: max_err=%.4e  bad_columns=%s" % (max_err, bad))
+    print("documented 2026-11-01: 8.5e-01 ; measured now: %.4e" % max_err)
 
-    cov_x = min(BLOCK[0], field.shape[1])
-    cov_y = min(BLOCK[1], field.shape[0])
-    covered = err[:cov_y, :cov_x]
-    uncovered = err[:, cov_x:]
-
-    print(f"shape={field.shape}  block={BLOCK} -> covers x<{cov_x}, y<{cov_y}")
-    print(f"covered   region max_err = {covered.max():.3e}")
-    print(f"uncovered region max_err = {uncovered.max():.3e}  (columns {cov_x}..{field.shape[1]-1})")
-    print(f"uncovered region all-zero in output: {np.allclose(np.asarray(gpu)[:, cov_x:], 0.0)}")
-
-    ok = covered.max() < 2e-5 and uncovered.max() > 1e-3
-    print(f"\n{'CONFIRMED' if ok else 'NOT CONFIRMED'}: error is confined to the uncovered grid region")
-
-    # what a correct launch would produce for the uncovered columns
-    print(f"expected value at [0,{cov_x}] = {cpu[0, cov_x]:.6f}, gpu gave {np.asarray(gpu)[0, cov_x]:.6f}")
+    ok = (0.80 < max_err < 0.90) and bad == list(range(32, 64))
+    print("%s: pre-fix loader reproduces the documented failure"
+          % ("CONFIRMED" if ok else "NOT CONFIRMED"))
     return 0 if ok else 1
+
+
+def main():
+    if "--legacy" in sys.argv:
+        return legacy_mode()
+    return current_mode()
 
 
 if __name__ == "__main__":

@@ -2,12 +2,16 @@
 
 The patch threads first_array_shape -> _get_grid_block, but the 8x64 case still
 mismatches, so something earlier is supplying a grid. This prints what arrives.
+
+Run from anywhere: the kernel-loader dir is resolved from __file__, not cwd.
 """
+import os
 import sys
 
 import numpy as np
 
-sys.path.insert(0, r"C:\abrasax\SYSTEMS\ABRASAX-7D-Crystal\kernels\cuda")
+sys.path.insert(0, os.path.join(
+    os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "kernels", "cuda"))
 
 import cuda_kernel_loader as m
 
@@ -32,4 +36,4 @@ out = rt.quantum_evolution_2d(field.copy(), phase=0.3, dt=0.1)
 print("output shape:", out.shape)
 
 # what a correct launch covers
-print(f"needed grid: x={-(-64//16)}, y={-(-8//16)}")
+print(f"needed grid: x={-(-64 // 16)}, y={-(-8 // 16)}")

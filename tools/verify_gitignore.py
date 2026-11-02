@@ -1,7 +1,14 @@
 """Prove the 7D-Crystal .gitignore keeps the kernels and drops the noise.
 
-Run inside the repo:
-    python tools/verify_gitignore.py [repo]
+Run inside the repo (or point it at one):
+    python tools/verify_gitignore.py [path]
+
+ROOT RESOLUTION. The rules being checked live in two places -- the repo root
+C:\\abrasax\\.gitignore and the subtree SYSTEMS\\ABRASAX-7D-Crystal\\.gitignore --
+and the 27 probe paths are subtree-relative. Pointing the tool at C:\\abrasax
+used to "pass" while 16 of the 17 committable files did not exist at that level,
+i.e. it verified nothing. It now requires a marker file and descends into the
+subtree when pointed at its parent, and exits 3 when no marker exists at all.
 
 CHECKED (measured 2026-11-01 against C:\\abrasax\\.gitignore as it actually
 behaved -- `git check-ignore -v` names the matching rule):
@@ -14,15 +21,31 @@ behaved -- `git check-ignore -v` names the matching rule):
   * now the sources and shipped kernel artifacts are committable and the build
     output still is not.
 
-A path that does not exist on disk is probed as a directory-content check
-instead, because git will not report a nonexistent path as ignored.
+HOW THE COMMITTABLE ONES SURVIVE: 12 of the 17 MUST_BE_TRACKED paths are kept
+only by `!` re-include rules later in the root file (`!**/cuda/build/*`,
+`!SYSTEMS/ABRASAX-7D-Crystal/kernels/**`). Delete those negations and the kernel
+artifacts silently become ignored again -- tools/_audit_verify_gitignore.py
+demonstrates that in a throwaway repo.
+
+WHY THE DECISION IS PARSED, NOT JUST THE EXIT CODE: `git check-ignore -q` and
+`-v` disagree on negations. For an untracked path re-included by `!rule`,
+`-q` exits 1 (not ignored) while `-v` exits 0 and prints the rule. Trusting
+`-v`'s exit status alone marks committed kernel artifacts as IGNORED; trusting
+`-q` alone throws away the rule name. So: read the pattern, and a pattern that
+starts with `!` means re-included, i.e. not ignored.
+
+Nonexistent paths are fine for git (it matches patterns without stat-ing the
+file), but they are not fine as evidence, so absences are counted and printed.
+Nothing here writes to the working tree.
 """
 from __future__ import annotations
 
 import subprocess
 import sys
-import tempfile
 from pathlib import Path
+
+MARKER = "kernels/cuda/crystal_cortex.h"
+SUBTREE = ("SYSTEMS", "ABRASAX-7D-Crystal")
 
 MUST_BE_TRACKED = [
     "cuda/build/crystal_kernels_v2.ptx",
@@ -59,44 +82,68 @@ MUST_BE_IGNORED = [
 ]
 
 
-def _ignored(repo: Path, rel: str, scratch: Path) -> bool:
-    """Ignore-test a path, materialising a probe file when it does not exist."""
-    target = repo / rel
-    if target.exists():
-        p = subprocess.run(["git", "check-ignore", "-q", rel], cwd=str(repo),
-                           capture_output=True)
-        return p.returncode == 0
-    # nonexistent: git can still answer for a path, but not reliably for a file
-    # inside an ignored directory, so probe with a real temporary name.
-    probe = scratch / Path(rel).name
-    probe.write_bytes(b"x")
-    p = subprocess.run(["git", "check-ignore", "-q", rel], cwd=str(repo),
-                       capture_output=True)
-    return p.returncode == 0
+def resolve_root(given: Path) -> tuple[Path, str]:
+    """Descend into the subtree when pointed at its parent. Marker or bust."""
+    if (given / MARKER).is_file():
+        return given, "marker %s present" % MARKER
+    nested = given.joinpath(*SUBTREE)
+    if (nested / MARKER).is_file():
+        return nested, "descended into %s (marker found there)" % "/".join(SUBTREE)
+    return given, "MARKER %s NOT FOUND" % MARKER
+
+
+def _decision(repo: Path, rel: str) -> tuple[bool, str]:
+    """(is_ignored, rule). A `!` pattern means re-included, so NOT ignored."""
+    proc = subprocess.run(["git", "check-ignore", "-v", rel], cwd=str(repo),
+                          capture_output=True, text=True)
+    if proc.returncode != 0:
+        return False, ""
+    line = (proc.stdout or "").strip().splitlines()
+    if not line:
+        return False, ""
+    rule = line[0].split("\t")[0].strip()
+    parts = rule.rsplit(":", 2)
+    pattern = parts[2] if len(parts) == 3 else rule
+    return (not pattern.startswith("!")), rule
 
 
 def main() -> int:
-    repo = Path(sys.argv[1] if len(sys.argv) > 1 else
-                r"C:\abrasax\SYSTEMS\ABRASAX-7D-Crystal")
+    given = Path(sys.argv[1] if len(sys.argv) > 1 else
+                 r"C:\abrasax\SYSTEMS\ABRASAX-7D-Crystal")
+    repo, why = resolve_root(given)
+    print(f"root: {repo}  ({why})")
+    if why.startswith("MARKER"):
+        print(f"refusing to report a verdict: {repo} is not the 7D-Crystal subtree")
+        return 3
     if not (repo / ".gitignore").is_file():
         print(f"no .gitignore in {repo}")
         return 2
+
     bad = 0
-    with tempfile.TemporaryDirectory() as td:
-        scratch = Path(td)
-        for rel in MUST_BE_TRACKED:
-            ig = _ignored(repo, rel, scratch)
-            missing = "" if (repo / rel).exists() else " [absent on disk]"
-            print(f"{'XX' if ig else '  '} must-be-committable {rel:<56}"
-                  f"{'IGNORED' if ig else 'ok'}{missing}")
-            bad += 1 if ig else 0
-        for rel, note in MUST_BE_IGNORED:
-            ig = _ignored(repo, rel, scratch)
-            print(f"{'  ' if ig else 'XX'} must-be-ignored    {rel:<56}"
-                  f"{'ignored' if ig else 'COMMITTABLE'}  ({note})")
-            bad += 0 if ig else 1
-    print(f"\nprobe scratch={scratch} (removed)")
-    print(f"{bad} misconfigured")
+    absent = []
+    for rel in MUST_BE_TRACKED:
+        ig, rule = _decision(repo, rel)
+        if not (repo / rel).exists():
+            absent.append(rel)
+        if ig:
+            state = f"IGNORED by {rule}"
+        elif rule:
+            state = f"ok, rescued by {rule}"
+        else:
+            state = "ok"
+        print(f"{'XX' if ig else '  '} must-be-committable {rel:<56}{state}"
+              f"{' [absent on disk]' if rel in absent else ''}")
+        bad += 1 if ig else 0
+    for rel, note in MUST_BE_IGNORED:
+        ig, rule = _decision(repo, rel)
+        shown = (rule or "ignored") if ig else "COMMITTABLE"
+        print(f"{'  ' if ig else 'XX'} must-be-ignored    {rel:<56}{shown}  ({note})")
+        bad += 0 if ig else 1
+
+    if absent:
+        print(f"\nnote: {len(absent)} of {len(MUST_BE_TRACKED)} committable paths are "
+              f"absent on disk; the verdict for those is about patterns, not files")
+    print(f"\n{bad} misconfigured")
     return 0 if bad == 0 else 1
 
 

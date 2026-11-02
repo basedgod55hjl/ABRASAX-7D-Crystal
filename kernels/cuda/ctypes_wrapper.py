@@ -91,7 +91,7 @@ class CudaKernelRuntime:
     def _init_pycuda(self) -> None:
         """Backend: pycuda via crystal_kernels.CrystalKernelContext."""
         try:
-            from cuda.crystal_kernels import CrystalKernelContext, HAVE_PYCUDA
+            from crystal_kernels import CrystalKernelContext, HAVE_PYCUDA
 
             if not HAVE_PYCUDA:
                 raise RuntimeError("pycuda import failed in crystal_kernels")
@@ -157,7 +157,7 @@ class CudaKernelRuntime:
     def manifold_projection_7d(self, input_data: np.ndarray, dim: int = 64) -> np.ndarray:
         """Project input onto the 7D Poincare ball manifold."""
         if self._backend == "pycuda" and self._pyctx is not None:
-            from cuda.crystal_kernels import manifold_projection_7d as _pycu_fn
+            from crystal_kernels import manifold_projection_7d as _pycu_fn
             return _pycu_fn(input_data, dim=dim)
         # CPU simulation fallback
         return self._sim_manifold_projection(input_data, dim)
@@ -166,7 +166,7 @@ class CudaKernelRuntime:
                                 harmonic_order: int = 3) -> np.ndarray:
         """Apply PHI-harmonic modulation to data."""
         if self._backend == "pycuda" and self._pyctx is not None:
-            from cuda.crystal_kernels import phi_harmonic_modulation as _pycu_fn
+            from crystal_kernels import phi_harmonic_modulation as _pycu_fn
             return _pycu_fn(data, phase=phase, harmonic_order=harmonic_order)
         return self._sim_phi_modulation(data, phase, harmonic_order)
 
@@ -174,7 +174,7 @@ class CudaKernelRuntime:
                         phi_flux: float = 0.1) -> np.ndarray:
         """Unfold seed DNA into full parameter space via CBM flux."""
         if self._backend == "pycuda" and self._pyctx is not None:
-            from cuda.crystal_kernels import cbm_flux_unfold as _pycu_fn
+            from crystal_kernels import cbm_flux_unfold as _pycu_fn
             return _pycu_fn(seed, output_size, phi_flux=phi_flux)
         return self._sim_flux_unfold(seed, output_size, phi_flux)
 

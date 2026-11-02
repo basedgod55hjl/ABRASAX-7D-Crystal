@@ -48,7 +48,7 @@ DEFAULT_EMBEDDING_MODEL = os.environ.get(
     "ABRASAX_EMBEDDING_MODEL",
     "text-embedding-nomic-embed-text-v1.5",
 )
-DEFAULT_GEMMA_MODEL = os.environ.get("ABRASAX_MODEL", "google/gemma-4-e4b-uncensored-hauhaucs-aggressive")
+DEFAULT_GEMMA_MODEL = os.environ.get("ABRASAX_MODEL", "gemma-4-e2b-uncensored-hauhaucs-aggressive")
 
 
 @dataclass

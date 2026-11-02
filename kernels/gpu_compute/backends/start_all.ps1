@@ -22,7 +22,7 @@ $abrasaxRoot = Split-Path (Split-Path $root)
 # Wire LLM smoke tests to cbm_system/performance_config.json (same as Gemma launchers)
 $perfJsonPath = Join-Path $root 'cbm_system\performance_config.json'
 $llmBase = 'http://169.254.83.107:1234/v1'
-$llmChatModel = 'google/gemma-4-e4b-uncensored-hauhaucs-aggressive'
+$llmChatModel = 'gemma-4-e2b-uncensored-hauhaucs-aggressive'
 $llmEmbedModel = 'text-embedding-nomic-embed-text-v1.5'
 $embedBatchLines = 8
 $doGemmaAdvisor = $true
