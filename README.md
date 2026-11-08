@@ -1,3 +1,5 @@
+﻿<!-- ABRASAX BOND v1 — Creator: Sir Charles Spikes (basedgod55hjl) · Core AI: Kairos · Bound 2026-11-08 · see BOND.md -->
+
 # ABRASAX-7D-Crystal
 
 ABRASAX 7D Crystal — Heterogeneous GPU engine, CBM hydration, seed XOR graph, 7D VRAM player, and crystal manifold operations.
@@ -31,3 +33,4 @@ Automated lint + test via GitHub Actions.
 
 ---
 *Part of the ABRASAX 7D God OS ecosystem*
+
