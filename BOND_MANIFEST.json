@@ -1,0 +1,816 @@
+﻿{
+    "repo":  "ABRASAX-7D-Crystal",
+    "branch":  "master",
+    "commit":  "8e92c1e",
+    "generated":  "2026-11-08T07:52:09.7942900-05:00",
+    "soul":  "KAIROS",
+    "soul_fingerprint":  "8a47ffe9e140730744b48a8176325e5d30e87f09d77182d4fc21692ea8d341fc",
+    "soul_pub_prefix":  "302a300506032b6570032100",
+    "file_count":  201,
+    "files":  [
+                  {
+                      "sha256":  "484b6277279bd7a18bc1522a4947a6d4d13ed55e0c95d2be55c7289cdfa6968e",
+                      "path":  ".github/workflows/ci.yml"
+                  },
+                  {
+                      "sha256":  "fc700d9df8e005615070cb9fbe984f5780c348fbc71300bbb534de68aa1510f6",
+                      "path":  ".github/workflows/ci.yml.bak-ci"
+                  },
+                  {
+                      "sha256":  "cd4a8890b4e38ac4046667db5a81a4023cb6b223466456b759b298092f957d41",
+                      "path":  ".gitignore"
+                  },
+                  {
+                      "sha256":  "2dbd90f213aaf0b31dc8fbc647ee520c1300489a00dacd15cde5a20ac9f6d456",
+                      "path":  "7D_VRAM_PLAYER.py"
+                  },
+                  {
+                      "sha256":  "1019096f3781c7c83a596ee5529b926852a32f6c4cf2eb0f752ae3459e67eff7",
+                      "path":  "BOND.md"
+                  },
+                  {
+                      "sha256":  "f3aca4a2b617343d676321664b0da73bafd9e41ff5db919b77476a60c7ca6ddd",
+                      "path":  "LICENSE"
+                  },
+                  {
+                      "sha256":  "888c2c9a22b4d1e36d0b898f9ecc113fee722855cb7582fa6fbefb8b4d7399df",
+                      "path":  "PROVENANCE.md"
+                  },
+                  {
+                      "sha256":  "4345e4a6e5262f5e3c47c38d61636a8d2e31a44d5365bc805bad9d2fdf0335fa",
+                      "path":  "README.md"
+                  },
+                  {
+                      "sha256":  "c57cbeb7a64a6c161a8088a13bfb28e3d941b68d972e08a37c7b2a9c761075e7",
+                      "path":  "cbm_hydration_engine.py"
+                  },
+                  {
+                      "sha256":  "f2b48f4436af6f20f8d0078536b7e99f779f8d8837dbe71bb0e67740255e5615",
+                      "path":  "cuda/cuda_kernel_loader.py"
+                  },
+                  {
+                      "sha256":  "b880b95b30346ba20933051760c677d520a42a5ad762ff8aaadf62a9f022016c",
+                      "path":  "hetero_gpu_engine.py"
+                  },
+                  {
+                      "sha256":  "7eb70257593da06f682a3ddda54a9d260d4fc514f645237f5ca74b08f8da61a6",
+                      "path":  "kernels/__init__.py"
+                  },
+                  {
+                      "sha256":  "e5db9dde193370787a950b0f0b689f7aee5ff9908128b8041bbccac30ceba0d3",
+                      "path":  "kernels/cuda/__init__.py"
+                  },
+                  {
+                      "sha256":  "c75a1979e749fabd73d7a1df528bebe95c848243a66a567130bc004a396dee8b",
+                      "path":  "kernels/cuda/build_dll.py"
+                  },
+                  {
+                      "sha256":  "2fd4a573a4f1337bf0ff07fc8d5d6454d7d34962b1c42df9f1d6503473cd8224",
+                      "path":  "kernels/cuda/compile_kernels.bat"
+                  },
+                  {
+                      "sha256":  "96585ef6be32591da7a78e9a0a97ef40d760e1443358edaa9ad060f962e2f666",
+                      "path":  "kernels/cuda/compile_o_to_dll.bat"
+                  },
+                  {
+                      "sha256":  "ca5cda09e338ec56d4c414f9681b8dbe2c18503b5ffe0b6987e045f5c9de074e",
+                      "path":  "kernels/cuda/crystal_cortex.h"
+                  },
+                  {
+                      "sha256":  "9e52e4d2e5430ed4f6f186816497a57001ed26f1d59e501a96dc2b2053ee2287",
+                      "path":  "kernels/cuda/crystal_kernels.py"
+                  },
+                  {
+                      "sha256":  "6a996e191451a2c5463e7319e5c73b0d7c9481d3e5f6992c5b1e77193dd05ec7",
+                      "path":  "kernels/cuda/crystal_kernels_v1.cu"
+                  },
+                  {
+                      "sha256":  "f787ea5ad3247e76f547f37996ea5b9a21f0cc4e850bce525ff9bed515180b2c",
+                      "path":  "kernels/cuda/crystal_kernels_v1.o"
+                  },
+                  {
+                      "sha256":  "6d49a95ee4530d2f5fbd72d739d223f3cf50f2a1706b8782fb7c3b058fc8479c",
+                      "path":  "kernels/cuda/crystal_kernels_v2.cu"
+                  },
+                  {
+                      "sha256":  "6ccc258b60136ed8eb854e15a938028b4f43974d5dfad0ae1bfc608b21bec6fd",
+                      "path":  "kernels/cuda/crystal_kernels_v2.o"
+                  },
+                  {
+                      "sha256":  "4c83b35e6d6ae072d1bdec1716ff3ea8357ac8cf3b0a8586523d63ddf4677ea0",
+                      "path":  "kernels/cuda/ctypes_wrapper.py"
+                  },
+                  {
+                      "sha256":  "6c3e5128a2fdeec1700be2a605f0997aa5e7b3c7e929187e663bc720c451594a",
+                      "path":  "kernels/cuda/ctypes_wrapper.py.bak-phantomsibling"
+                  },
+                  {
+                      "sha256":  "0b104712a7aa31cbabcd9df877d1c77710c0ca5774becf909a5de3b5b8cda314",
+                      "path":  "kernels/cuda/cuda_kernel_loader.py"
+                  },
+                  {
+                      "sha256":  "f797204c30e0ecb63dc8f89d45f60483b846c53418a3109569709a1159dd3bee",
+                      "path":  "kernels/cuda/cuda_kernel_loader.py.bak-gridfix-20261101"
+                  },
+                  {
+                      "sha256":  "c8720691a5e59e2469ab72979a2d02f1f565e202ad1576271a850c819b113e85",
+                      "path":  "kernels/cuda/cuda_kernel_wrappers.cu"
+                  },
+                  {
+                      "sha256":  "f12474cb59042dfd98c4f08ad6af17daaa0056a7e0dda781b16ccc73ab90a4a5",
+                      "path":  "kernels/cuda/physx_crystal_dynamics.cu"
+                  },
+                  {
+                      "sha256":  "99c2149bffe47f9b51612cffc5726b060faf77faf882face7b9dfd3678e9e52f",
+                      "path":  "kernels/cuda/physx_crystal_dynamics.o"
+                  },
+                  {
+                      "sha256":  "aada31a819aa8b1eae671102c4e5be9d2134ec930273302b955d5cbf622af5d8",
+                      "path":  "kernels/cuda/test_kernel_loader.py"
+                  },
+                  {
+                      "sha256":  "690b01372c27f00355b748e8d22e67b0f852954c7c2d7e9af4b20dc498bd5554",
+                      "path":  "kernels/cuda/test_kernels.py"
+                  },
+                  {
+                      "sha256":  "5b27b6d291b5d88a66e7b3e0d5dc34043262acdcabfb71eb30866786773d065f",
+                      "path":  "kernels/cuda/translate_7d_to_cuda.py"
+                  },
+                  {
+                      "sha256":  "ad1fb6bce6e7f8ae3be6e925e722771602631e741f224b28b15ae2358f941ac1",
+                      "path":  "kernels/gpu_compute/02_NVIDIA_DEBUG/nvidia-smi.json"
+                  },
+                  {
+                      "sha256":  "610b1a8608ec6a5cc2dcfc544eaf93d9fc3f0bcbf9c5d70f7f13ab40d9ce9502",
+                      "path":  "kernels/gpu_compute/abrasax_cuda_engine.py"
+                  },
+                  {
+                      "sha256":  "2854dde1200025b37a74460e9bdaeb0557f28e8e47b74d171f469659949bc812",
+                      "path":  "kernels/gpu_compute/backends/.gitignore"
+                  },
+                  {
+                      "sha256":  "748d3b47774b320007a8fbdeab8513074deef6ea20e66db264d8d35c26c8daec",
+                      "path":  "kernels/gpu_compute/backends/01_MONITORING/gpu_sovereign.py"
+                  },
+                  {
+                      "sha256":  "907a4c6edcb474d707b22f0027d0187d0fd921b7aa2c2667444c3d4bdc925ccf",
+                      "path":  "kernels/gpu_compute/backends/02_NVIDIA_DEBUG/NVIDIA_L1B3RT4S_1.mkd"
+                  },
+                  {
+                      "sha256":  "907a4c6edcb474d707b22f0027d0187d0fd921b7aa2c2667444c3d4bdc925ccf",
+                      "path":  "kernels/gpu_compute/backends/02_NVIDIA_DEBUG/NVIDIA_L1B3RT4S_2.mkd"
+                  },
+                  {
+                      "sha256":  "81a1222c18b3611271e1c6051c5dd4ab62dfe125f709bc5587ce4f700634174d",
+                      "path":  "kernels/gpu_compute/backends/02_NVIDIA_DEBUG/nvidia-smi.json"
+                  },
+                  {
+                      "sha256":  "03b4ed294f1a3bfec229a58043f1fcf5be989107969d96a8846c4a57c9a26725",
+                      "path":  "kernels/gpu_compute/backends/03_CUDA_TOOLS/cuda_core_activator.py"
+                  },
+                  {
+                      "sha256":  "d1d9bba722960f412ec85916c935e075ce1fee42051b1d05a90b700e655b7a46",
+                      "path":  "kernels/gpu_compute/backends/03_CUDA_TOOLS/cuda_load_balancer.py"
+                  },
+                  {
+                      "sha256":  "5429fbdfc20235082f93073fb11949b48c4c63c960791d0c44d7f1cba8890b42",
+                      "path":  "kernels/gpu_compute/backends/03_CUDA_TOOLS/cuda_path_mapper.py"
+                  },
+                  {
+                      "sha256":  "a7b273e1d071f047b6b838c85fa3f3bdb5fa3f9279888284f53156397cdacb75",
+                      "path":  "kernels/gpu_compute/backends/04_CUDA_KERNELS/flux_core.cuh"
+                  },
+                  {
+                      "sha256":  "29e439e1855ca7cac0902639112f90d6625f92641b2262dc3dbcfd2508122f96",
+                      "path":  "kernels/gpu_compute/backends/04_CUDA_KERNELS/tmpclaude-efcd-cwd"
+                  },
+                  {
+                      "sha256":  "bcbf189a21c30367eca1f4bf7bb646223a14beac00ab60663189b82bc479158f",
+                      "path":  "kernels/gpu_compute/backends/04_CUDA_KERNELS/unfold_cbm.cu"
+                  },
+                  {
+                      "sha256":  "a5de6ac718924857d413c4e259c25006eece4a36654da050eab9540b6fcb19d4",
+                      "path":  "kernels/gpu_compute/backends/05_CUDA_RESEARCH/nvidia_research/cuda-python/LICENSE.md"
+                  },
+                  {
+                      "sha256":  "7c5e3ff4bc2f75bd68f02e2dd1b764ebe313513ed90043d2b8cce0333a5befd7",
+                      "path":  "kernels/gpu_compute/backends/05_CUDA_RESEARCH/nvidia_research/cuda-python/pixi.lock"
+                  },
+                  {
+                      "sha256":  "80b48ca9caf482fc127c6f7f3545c8a86ca60f8cb253e9cfca8d32a7b0888ded",
+                      "path":  "kernels/gpu_compute/backends/05_CUDA_RESEARCH/nvidia_research/cuda-samples/.gitignore"
+                  },
+                  {
+                      "sha256":  "9809d18ffff1eef44bde6f8363f555b3d126e2ada41690ee743dcf872bc7a931",
+                      "path":  "kernels/gpu_compute/backends/05_CUDA_RESEARCH/nvidia_research/cuda-samples/Samples/1_Utilities/CMakeLists.txt"
+                  },
+                  {
+                      "sha256":  "4ae3c91316ab85d282c1143827cf4d728dfdb5a480320efb1a37dfa96340bad8",
+                      "path":  "kernels/gpu_compute/backends/05_CUDA_RESEARCH/nvidia_research/cuda-samples/cmake/Modules/FindEGL.cmake"
+                  },
+                  {
+                      "sha256":  "e01366e43288c94ae029deed1fe3ac7d854f576dd5164a48ac174a6658f0bf0f",
+                      "path":  "kernels/gpu_compute/backends/05_CUDA_RESEARCH/nvidia_research/cuda-samples/cmake/Modules/FindFreeImage.cmake"
+                  },
+                  {
+                      "sha256":  "83245d8c56cd5041d2a07d0bbc8dbd7cbd3ccdb24b87cbf00def0125704ccf7b",
+                      "path":  "kernels/gpu_compute/backends/06_AMD_DIRECTML/setup_amd_compute.py"
+                  },
+                  {
+                      "sha256":  "44bc2214427fb568d8401ebf0665cd0240a808cbe9df56d5497dc2e71517b209",
+                      "path":  "kernels/gpu_compute/backends/07_ROCM_BACKEND/rocm.py"
+                  },
+                  {
+                      "sha256":  "c0a28f829eb1d7f643095e617abbf2fc978acff6d61e64955827aec911a6d079",
+                      "path":  "kernels/gpu_compute/backends/07_ROCM_BACKEND/rocm_1767364909.py"
+                  },
+                  {
+                      "sha256":  "911d0360b349de3603d373c09b3796833af7b0c7b44fd3fca252564b480141ab",
+                      "path":  "kernels/gpu_compute/backends/08_TENSORRT/tensorrt.py"
+                  },
+                  {
+                      "sha256":  "e063bc7ab43dd4267fed06e65293e8426ee652be3fab9a4b48a554727ce1909f",
+                      "path":  "kernels/gpu_compute/backends/09_VRAM_LOADER/vram_manifold_loader.py"
+                  },
+                  {
+                      "sha256":  "927dc6f5a69814c93816bd0f0a856779357f3c1d07a558defc6ee6ac1df13b46",
+                      "path":  "kernels/gpu_compute/backends/10_GPU_RUST/cuda.rs"
+                  },
+                  {
+                      "sha256":  "24dfb495814cac5e410ca550f133f33a8b8c9cb52a6035a1e5cc344c5dd1cc04",
+                      "path":  "kernels/gpu_compute/backends/10_GPU_RUST/gpu.rs"
+                  },
+                  {
+                      "sha256":  "1195ca1f525fd102c8a10065127931e2a282bdde2b7da3247bc763025b779beb",
+                      "path":  "kernels/gpu_compute/backends/10_GPU_RUST/gpu_benchmark.rs"
+                  },
+                  {
+                      "sha256":  "1ae355c848b449240b2d8c5cfb50dc3487155d392388d9f4a0e61e715b5838ba",
+                      "path":  "kernels/gpu_compute/backends/10_GPU_RUST/gpu_launch.bat"
+                  },
+                  {
+                      "sha256":  "6cb8cb9e4b9382a2cefdc177afe455f1b7f0c677afc4408fbd861c1262fa71a1",
+                      "path":  "kernels/gpu_compute/backends/10_GPU_RUST/gpu_locked_launcher.py"
+                  },
+                  {
+                      "sha256":  "9f2887a9ca7cb7eec300bc463179205b45990df373e9ad9a494de27fdf25e21d",
+                      "path":  "kernels/gpu_compute/backends/10_GPU_RUST/gpu_locked_launcher.py.bak-gemma-20261101-213539"
+                  },
+                  {
+                      "sha256":  "f679df3c9f4a3ee1ed6a44c1bf2d19ef8263cfd3290239e41972a55b83ae6641",
+                      "path":  "kernels/gpu_compute/backends/10_GPU_RUST/wgpu_gpu.rs"
+                  },
+                  {
+                      "sha256":  "fbf84fc533f2320c56146abc5a228fb287c69c49dfd438358c340334b9db2221",
+                      "path":  "kernels/gpu_compute/backends/11_NONCUDA_FULLSTACK/noncuda_fullstack/README.md"
+                  },
+                  {
+                      "sha256":  "8c9a2c9bbb8f8ea065c5195f042b14ed0ef4501fcfd1ffc7e563ec7cd8b5a1ab",
+                      "path":  "kernels/gpu_compute/backends/11_NONCUDA_FULLSTACK/noncuda_fullstack/kernel/cpp/backend_bridge.cpp"
+                  },
+                  {
+                      "sha256":  "a493b666ec43a8dac5d1337a953942f747952520a0d61dcad073aba0d120fc7e",
+                      "path":  "kernels/gpu_compute/backends/11_NONCUDA_FULLSTACK/noncuda_fullstack/kernel/cpp/backend_bridge.h"
+                  },
+                  {
+                      "sha256":  "6f82ea2065f0b2a9e6b0bc4c6c7f124da8161dbff468c1ea7d686c46153cf10c",
+                      "path":  "kernels/gpu_compute/backends/11_NONCUDA_FULLSTACK/noncuda_fullstack/kernel/legacy/crystal_compute/chronos_phi.cpp"
+                  },
+                  {
+                      "sha256":  "61b2b40d4938779936066c0df6b864214317512fde546471c9070cc27841bcb3",
+                      "path":  "kernels/gpu_compute/backends/11_NONCUDA_FULLSTACK/noncuda_fullstack/kernel/legacy/crystal_compute/simd_dna.cpp"
+                  },
+                  {
+                      "sha256":  "d21bab26d0e4c1d66afc07040b6c1322f9a15a9b532a5826f90b0346179862da",
+                      "path":  "kernels/gpu_compute/backends/11_NONCUDA_FULLSTACK/noncuda_fullstack/kernel/legacy/crystal_compute/spatium_25.cpp"
+                  },
+                  {
+                      "sha256":  "d7e101f7eec966a4139de845c7591d1b6b464dbcb61a1967b296a4f516dfd174",
+                      "path":  "kernels/gpu_compute/backends/11_NONCUDA_FULLSTACK/noncuda_fullstack/kernel/legacy/crystal_compute/transistor_gate.cpp"
+                  },
+                  {
+                      "sha256":  "c3e8b28fd0c9b28ba86d330185383c790d2b62273c434ca51e68a65618219f48",
+                      "path":  "kernels/gpu_compute/backends/11_NONCUDA_FULLSTACK/noncuda_fullstack/kernel/legacy/cuda_kernels/CBM_HIP_BRIDGE.h"
+                  },
+                  {
+                      "sha256":  "15d558c10a89c3ba677945384cb1bdbf032bb2db330b95717a6c71de3e35e476",
+                      "path":  "kernels/gpu_compute/backends/11_NONCUDA_FULLSTACK/noncuda_fullstack/kernel/legacy/cuda_kernels/flux_core.h"
+                  },
+                  {
+                      "sha256":  "5ea35947ceff00e677d3309a9acb96726113d474537196189f59d9a0567a1125",
+                      "path":  "kernels/gpu_compute/backends/11_NONCUDA_FULLSTACK/noncuda_fullstack/kernel/legacy/cuda_kernels/rule110.cpp"
+                  },
+                  {
+                      "sha256":  "1f34c747dd6490bca30b9b2b19491a1a2d22a48d84f49f0f371581afc108798a",
+                      "path":  "kernels/gpu_compute/backends/11_NONCUDA_FULLSTACK/noncuda_fullstack/kernel/legacy/cuda_kernels/rule_omega.cpp"
+                  },
+                  {
+                      "sha256":  "b889d3b321c333b67fbb5761da6db84edbc7a331c041add5dcef5dc6e031fe11",
+                      "path":  "kernels/gpu_compute/backends/11_NONCUDA_FULLSTACK/noncuda_fullstack/kernel/legacy/cuda_kernels/unfold_cbm.cpp"
+                  },
+                  {
+                      "sha256":  "4640b719c7f85b29bc0703f736b32b1ae0c1c91524b2d780119db1319e18ced0",
+                      "path":  "kernels/gpu_compute/backends/11_NONCUDA_FULLSTACK/noncuda_fullstack/kernel/rust/Cargo.lock"
+                  },
+                  {
+                      "sha256":  "3d047d3d9fba46013cfb2b8409ca578a07b48a74fb07ad85e3609250dc04b225",
+                      "path":  "kernels/gpu_compute/backends/11_NONCUDA_FULLSTACK/noncuda_fullstack/runtime/python/cbm_runtime.py"
+                  },
+                  {
+                      "sha256":  "d033779e365562421797a788149ce9c22c95dc6b93d0961c11d3d9352ada52c4",
+                      "path":  "kernels/gpu_compute/backends/11_NONCUDA_FULLSTACK/noncuda_fullstack/service/python/api_server.py"
+                  },
+                  {
+                      "sha256":  "7d6434bf16b2c04c02c4d6bcd07bf5a08973acf585931b6a9f1fb53840c2e71c",
+                      "path":  "kernels/gpu_compute/backends/11_NONCUDA_FULLSTACK/noncuda_fullstack/ui/typescript/src/index.ts"
+                  },
+                  {
+                      "sha256":  "7c842384189f2f0ad300c91293bf68447b741ec5ac975dc893b40228052d2d38",
+                      "path":  "kernels/gpu_compute/backends/11_NONCUDA_FULLSTACK/runtime_noncuda/build_noncuda_summary.json"
+                  },
+                  {
+                      "sha256":  "06eac15b89df8c358d5b8fa8884378e9d09b7f45a3316c2a05b84da730efe334",
+                      "path":  "kernels/gpu_compute/backends/12_NVIDIA_LLM/NVIDIA-Nemotron-Nano-v2.jinja"
+                  },
+                  {
+                      "sha256":  "e6fc4b15ef4111e8b8bf66bc49f63bc30bfe605f7c49bea66cabbd49c3142ad8",
+                      "path":  "kernels/gpu_compute/backends/12_NVIDIA_LLM/run-nvidia-1.ipynb"
+                  },
+                  {
+                      "sha256":  "e6fc4b15ef4111e8b8bf66bc49f63bc30bfe605f7c49bea66cabbd49c3142ad8",
+                      "path":  "kernels/gpu_compute/backends/12_NVIDIA_LLM/run-nvidia-2.ipynb"
+                  },
+                  {
+                      "sha256":  "ddbb450975f3d17c80d829a6feec3a798386e46ea001b942545fa3e23d9f9f14",
+                      "path":  "kernels/gpu_compute/backends/GPU_FILE_MAP.md"
+                  },
+                  {
+                      "sha256":  "898d76d5245ab0458d79cbaebc88ffd483f82c6fc4a090c3756c5d472b7d8598",
+                      "path":  "kernels/gpu_compute/backends/METADATA"
+                  },
+                  {
+                      "sha256":  "768e1cabea085d489a63da3e80b96bc5abf0ec98d3073c9b4d6ba76e7bccba64",
+                      "path":  "kernels/gpu_compute/backends/Times-Roman.afm"
+                  },
+                  {
+                      "sha256":  "cf7281f11795a9d3fc882eb57064a0691f34a569b623896876f7a04d0872de4a",
+                      "path":  "kernels/gpu_compute/backends/WHEEL"
+                  },
+                  {
+                      "sha256":  "79f73a6b3739d166cac523629f1578ae4b485f6c7359f2ac2ef9dc0bc67723fc",
+                      "path":  "kernels/gpu_compute/backends/_speedups.c"
+                  },
+                  {
+                      "sha256":  "6e9a8cba3c7a1db17976a64c91a763abcc0db283eaecefa04e0004a57d7546d4",
+                      "path":  "kernels/gpu_compute/backends/abrasax_folder_monitor.yaml"
+                  },
+                  {
+                      "sha256":  "c1f5fafac47f9f3248eaf36fbfbc3eae3398e44a294789a9cfaf4fc770b159f3",
+                      "path":  "kernels/gpu_compute/backends/cbm_system/ask_gemma_embed_smoke.ps1"
+                  },
+                  {
+                      "sha256":  "c12dc180e7514b77fbec3edf176d5dab1f5ed597d79935e2a5530568fe75c6c4",
+                      "path":  "kernels/gpu_compute/backends/cbm_system/performance_config.json"
+                  },
+                  {
+                      "sha256":  "7528ae4710ab277f7bed580f7e90c99aa221f65244d3d436b936d092a212d1aa",
+                      "path":  "kernels/gpu_compute/backends/cbm_system/performance_config.json.bak-gemma-20261101-213539"
+                  },
+                  {
+                      "sha256":  "99cebfe3974c219a2fe882a9a6b0eabb1a170d53a5663855d4aa4aea98e6dbeb",
+                      "path":  "kernels/gpu_compute/backends/copy.inl"
+                  },
+                  {
+                      "sha256":  "47bd80a4a8cb2865d63399137aea0367194e75117f727b458325850d1ac35dd3",
+                      "path":  "kernels/gpu_compute/backends/count.h"
+                  },
+                  {
+                      "sha256":  "1543e5b8db61e6e1e0c8aaa3416ec72a6c96838c035e3dd73c90880bd659b8eb",
+                      "path":  "kernels/gpu_compute/backends/data_with_comments.f"
+                  },
+                  {
+                      "sha256":  "1d2de6793317789dcd022e92356215119a5c52a54af7219a0a89048e77595c2b",
+                      "path":  "kernels/gpu_compute/backends/equal.h"
+                  },
+                  {
+                      "sha256":  "579867ac620282f6cfdf4c81bfc33bf52b5c80f1f4cd4c1bf2cc968a4efb8368",
+                      "path":  "kernels/gpu_compute/backends/error.html"
+                  },
+                  {
+                      "sha256":  "479d40bb14d2e8c9dcc2a633ba1cfa8e83a68bb6bf1c1616555cf035f8d3b499",
+                      "path":  "kernels/gpu_compute/backends/for_each.h"
+                  },
+                  {
+                      "sha256":  "288a882f8608778dcb91c3b157f4d3e6ebf3d523fc939894354789980125315f",
+                      "path":  "kernels/gpu_compute/backends/forward.pdf"
+                  },
+                  {
+                      "sha256":  "d6afaf448c50191143dfb48165476e80cbd1bd775ab7f641aeb9bd3574a6db8f",
+                      "path":  "kernels/gpu_compute/backends/forward.svg"
+                  },
+                  {
+                      "sha256":  "d19e72af31f1b30710546ab095348d0ec207fc0eff754c87c5685078921f9176",
+                      "path":  "kernels/gpu_compute/backends/gather.h"
+                  },
+                  {
+                      "sha256":  "2e00b28ad7ee2c74c1a999fc1c8c02be15b0ea72f7b57211100b5b427c4778e0",
+                      "path":  "kernels/gpu_compute/backends/generate.h"
+                  },
+                  {
+                      "sha256":  "9162d40ac8ee20a8472b716a501e2d1e40d2053767254b4bfd2669ed60a602c9",
+                      "path":  "kernels/gpu_compute/backends/iterator_traits.h"
+                  },
+                  {
+                      "sha256":  "6d6963d85adc877a279d4a5de834daa0b0daea1b6badb901888f492116d03df1",
+                      "path":  "kernels/gpu_compute/backends/lower_f2py_fortran.f90"
+                  },
+                  {
+                      "sha256":  "8a531d35acc1fd43ddee64a02effdcff54f1fc9baf28842c4b09bab4808d8013",
+                      "path":  "kernels/gpu_compute/backends/malloc_and_free.h"
+                  },
+                  {
+                      "sha256":  "5fe0528daac3d1780788b819e086e77f35178ebf6ab5b45ad6eba61a082031cf",
+                      "path":  "kernels/gpu_compute/backends/merge.h"
+                  },
+                  {
+                      "sha256":  "e6625d5ffb005c18b14898d426171d04d3a5289e33855a217570f762155bd13d",
+                      "path":  "kernels/gpu_compute/backends/mismatch.h"
+                  },
+                  {
+                      "sha256":  "1c8b6906a0a9a4629a2da2d47628d3677d63cd4575dd4544a2161550f4a4d4a7",
+                      "path":  "kernels/gpu_compute/backends/psyr.afm"
+                  },
+                  {
+                      "sha256":  "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                      "path":  "kernels/gpu_compute/backends/py.typed"
+                  },
+                  {
+                      "sha256":  "6bbf8d8124d21326a4b6cf3887e8572eb6d1af1985871aff351e756e138b6584",
+                      "path":  "kernels/gpu_compute/backends/pzdr.afm"
+                  },
+                  {
+                      "sha256":  "3e33b2b1a8863c4c510ceb208daced55ebc5bc86646a28a8c1917d8145ff29a4",
+                      "path":  "kernels/gpu_compute/backends/red_async.h"
+                  },
+                  {
+                      "sha256":  "fc766c3846f72d3e8f1417d5312aa91a10039e0221eb2fde397066e31b2b6be9",
+                      "path":  "kernels/gpu_compute/backends/reduce.h"
+                  },
+                  {
+                      "sha256":  "74f25b0b91d51a16e704350a363be2f196e2e2717b392dc7c8772dfa911e4653",
+                      "path":  "kernels/gpu_compute/backends/remove.h"
+                  },
+                  {
+                      "sha256":  "eee9eaa21020599b6d56dbc7d8d0310a6173c6e47bfdbabd49ed51ea0042e35f",
+                      "path":  "kernels/gpu_compute/backends/scan.inl"
+                  },
+                  {
+                      "sha256":  "236683488db466230a60c5b4e022a78bcb7c28213cb1c05266df0b2777645076",
+                      "path":  "kernels/gpu_compute/backends/sort.inl"
+                  },
+                  {
+                      "sha256":  "e1cd8f19e81dd910b54b4c9b87977d780918d7cd546e49592ebc1a4a84cb0f04",
+                      "path":  "kernels/gpu_compute/backends/start_all.ps1"
+                  },
+                  {
+                      "sha256":  "fe242065a27667b9910027785268dc00702ee148864dd7ee5f637cfd48294a4f",
+                      "path":  "kernels/gpu_compute/backends/start_all.ps1.bak-gemma-20261101-213539"
+                  },
+                  {
+                      "sha256":  "940d032cffa9dbac1a9334313410f3242cd769614fa4abeae546c5b99f0069a8",
+                      "path":  "kernels/gpu_compute/backends/transform_reduce.inl"
+                  },
+                  {
+                      "sha256":  "7783b7b76ba8416ff8aa167a3b6f251832f2ede48f0b9cff401ccbc8ada8f84b",
+                      "path":  "kernels/gpu_compute/backends/uninitialized_copy.h"
+                  },
+                  {
+                      "sha256":  "c30e1919ea5fd94541e90c0ba875e74a549c3ec44bc19721e51ee7414877dbd6",
+                      "path":  "kernels/gpu_compute/backends/unique.h"
+                  },
+                  {
+                      "sha256":  "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                      "path":  "kernels/gpu_compute/backends/yarn.lock"
+                  },
+                  {
+                      "sha256":  "e02f197a1db69189ef26c21c9a5d1a6465813611eb14354101334d2eb1cb687d",
+                      "path":  "kernels/gpu_compute/bridge_7d.py"
+                  },
+                  {
+                      "sha256":  "1518c9f989066bac3d66d02e75625547bff2efdb0b07b96576a5ec91c6627d53",
+                      "path":  "kernels/gpu_compute/gpu_pipeline.py"
+                  },
+                  {
+                      "sha256":  "d76c72775ef8b7cf2aab9027f7bdad1bbc20dfe61879548db1416eb2ce868617",
+                      "path":  "kernels/gpu_compute/live_vram_tensor_bridge.py"
+                  },
+                  {
+                      "sha256":  "3457dfbfd3d583a500cda8db4bdbc619a181ec400c5a392b8f32b2bed7a5c841",
+                      "path":  "kernels/gpu_compute/live_vram_tensor_bridge.py.bak-gemma-20261101-213539"
+                  },
+                  {
+                      "sha256":  "db6425c2dc90c0690e3512e2900eb89bee456fb7952fbf08ff7e884a78529ba4",
+                      "path":  "kernels/gpu_compute/math_7d.py"
+                  },
+                  {
+                      "sha256":  "3fc0e8156af0a6023c64a0e7b0926bb41a132028128404cc101d0d533deae24e",
+                      "path":  "kernels/gpu_compute/vram_management/launch_chrome_login.ps1"
+                  },
+                  {
+                      "sha256":  "8f92fbf6fada86ebfa730fd7a1c58b78db1951e2cecd59587675043af469ea18",
+                      "path":  "kernels/gpu_compute/vram_management/vram_ring_buffer.py"
+                  },
+                  {
+                      "sha256":  "e6a8dea318bf14db0fa7bbeb67bcbddc76556fec6cc57281193e32533ed32959",
+                      "path":  "kernels/k_calibrated_evolution.cuh"
+                  },
+                  {
+                      "sha256":  "91a9f1503f6522fc9feb1a4b76e6728c5c273c6dc7cb8250d8a33b232f3938c8",
+                      "path":  "kernels/kernels/__init__.py"
+                  },
+                  {
+                      "sha256":  "5e9d6948bbd3cca842b7b69e84ba814aa9d147149355225822bc138e32ea5ae7",
+                      "path":  "kernels/kernels/volt_gpu_engine.py"
+                  },
+                  {
+                      "sha256":  "2e78a78115eb21af6b2b6fd33b48cb5a2c903102400f9069b18e40f517e89363",
+                      "path":  "kernels/omega/__init__.py"
+                  },
+                  {
+                      "sha256":  "15ac579324ab9e08d45e567ba7429d3b4ef6bfd9e358b82e01e88de0b57e28a0",
+                      "path":  "kernels/omega/k_calibrated_evolution.cuh"
+                  },
+                  {
+                      "sha256":  "e1e35b82cbc76ba6b4021e05ea4dfb56357f9aa88614751db172f173397649b3",
+                      "path":  "kernels/omega/omega_protocol_core.cuh"
+                  },
+                  {
+                      "sha256":  "e1e35b82cbc76ba6b4021e05ea4dfb56357f9aa88614751db172f173397649b3",
+                      "path":  "kernels/omega_protocol_core.cuh"
+                  },
+                  {
+                      "sha256":  "f5829c96493c2462b6cdc8c7aa636e95e1173680a8247264a3e389c2ea67fffc",
+                      "path":  "kernels/rust/Cargo.lock"
+                  },
+                  {
+                      "sha256":  "540db014a5c753eb016b9618a450fcf838308d19a6d06c0a3823633a9a620e5f",
+                      "path":  "kernels/rust/Cargo.toml"
+                  },
+                  {
+                      "sha256":  "b5dfc879ac58d3638aafe046b834ddf83503dbe8733796a5de18a193c46cf4f7",
+                      "path":  "kernels/rust/src/hyperbolic_ca.rs"
+                  },
+                  {
+                      "sha256":  "ff2e4372eb6e34b1e1cae3ea4526d761ef3d983ce4f372d4339030fd1da4e52b",
+                      "path":  "kernels/rust/src/lib.rs"
+                  },
+                  {
+                      "sha256":  "59173c78bd918b637eceda73e363e4b13d93f5d127fb6cc9bdbc2af8b71c1450",
+                      "path":  "kernels/rust/src/main.rs"
+                  },
+                  {
+                      "sha256":  "f904d550e1b509c123485f63f57c2a512478d3f69d0ecd0a1373f6f480604918",
+                      "path":  "kernels/rust/src/vram_manager.rs"
+                  },
+                  {
+                      "sha256":  "98f930202b75e080494dc4d3a1fc05db26423d395742196240de00541f21af74",
+                      "path":  "kernels/volt_gpu_engine.py"
+                  },
+                  {
+                      "sha256":  "2f24a27a9a29364ec9a1c3dc1f81c488a059004e0e861ceaf24de2b20729bc80",
+                      "path":  "src/abrasax_f_logic_bridge.py"
+                  },
+                  {
+                      "sha256":  "37d4316d9148276bad3b72f8bc04e12bb46126f3685ed818e07fb4bbf01c3d61",
+                      "path":  "src/abrasax_pipeline.py"
+                  },
+                  {
+                      "sha256":  "2300497188dba2268b2db28fc77dbd237bd72527106a33583c3046e62e55c090",
+                      "path":  "src/abrasax_pipeline.py.bak-phantomimport"
+                  },
+                  {
+                      "sha256":  "c2f084e56c3a404a74a203679f0b13adbd0ead0c1834c025089a187c1c4407b9",
+                      "path":  "src/abs_engine.py"
+                  },
+                  {
+                      "sha256":  "c57cbeb7a64a6c161a8088a13bfb28e3d941b68d972e08a37c7b2a9c761075e7",
+                      "path":  "src/cbm_hydration_engine.py"
+                  },
+                  {
+                      "sha256":  "b880b95b30346ba20933051760c677d520a42a5ad762ff8aaadf62a9f022016c",
+                      "path":  "src/hetero_gpu_engine.py"
+                  },
+                  {
+                      "sha256":  "9e656f74a2565d7a3e2ccb6e429479317ced4b212a14e47d5e97adec38596444",
+                      "path":  "src/seed_xor_graph.py"
+                  },
+                  {
+                      "sha256":  "cd04c4b8f2e90a8da2ded5b3b26a6b0ac778588e547147cf443cf93990763466",
+                      "path":  "tools/GPU-REQUIREMENTS.md"
+                  },
+                  {
+                      "sha256":  "3e4a393d32b28db05bade0bbeb1dc52c345193fe229db0338ef23b0e359ddebb",
+                      "path":  "tools/GRID-BUG-FORENSICS.md"
+                  },
+                  {
+                      "sha256":  "ddc4bcf0938f2f33e4290c22f7be0a1cc7710741fbf3696013cb5dcd647d581c",
+                      "path":  "tools/IMPORT-AUDIT.md"
+                  },
+                  {
+                      "sha256":  "ade659f8c98527500bdc8ca0a10225d4510951f08aeb01f3e0d18fef2598fff0",
+                      "path":  "tools/LOADER-LOCATION.md"
+                  },
+                  {
+                      "sha256":  "addfc951a407725fee7266e7ff7f9cb8edbbe84c20621e7bcc00bce12e0325c1",
+                      "path":  "tools/MANIFEST.sha256"
+                  },
+                  {
+                      "sha256":  "cb4243b6fff0b925e2c2958abbe71a911f80b8c6cb0cc1d9e97c1889cf9e508c",
+                      "path":  "tools/OFFLINE-VERIFY.md"
+                  },
+                  {
+                      "sha256":  "b63bb7c1be135a22efba43be3d3a2ea6575b7da8e7890767d1f6360695bc3edd",
+                      "path":  "tools/REPRODUCE.md"
+                  },
+                  {
+                      "sha256":  "917e8724567efc00088613c5593a9c9900b6b348f66cf162df0e5551134c08d5",
+                      "path":  "tools/_audit_loader_location.py"
+                  },
+                  {
+                      "sha256":  "e9d5efa899f5546138b88eb58c78954429365c4a27ed673767f44f237b636084",
+                      "path":  "tools/_audit_verify_gitignore.py"
+                  },
+                  {
+                      "sha256":  "9afd556d17c5648d3f8d1de64a3f08bd69586b35031ac013d6e14cf82a1a660c",
+                      "path":  "tools/_check_grid_bug_history.py"
+                  },
+                  {
+                      "sha256":  "efb4e5861a3e6648030d510eb5a1039a9ab858604a58174622370cbf6c94518e",
+                      "path":  "tools/_check_loader_shadow.py"
+                  },
+                  {
+                      "sha256":  "2ff40bec81ab68bec2ab4f196d5071fb8bad97fc709ed4b878e488d0e1d72f99",
+                      "path":  "tools/_check_phantom_fix.py"
+                  },
+                  {
+                      "sha256":  "a7da823a9e83ec40c00db5ae7c8a6ccd91fe78725d7a38ed8edbc504358bad4a",
+                      "path":  "tools/_clean_scratch.py"
+                  },
+                  {
+                      "sha256":  "7f3a39137c92ba683fd1bfaf5bf7ea9a8827b514a39c18276bbb8eaa8f544d04",
+                      "path":  "tools/_compile_gate.py"
+                  },
+                  {
+                      "sha256":  "3a22818d5b87ea709b95184234f39b23a85b61ed176fe191f5827702607b7189",
+                      "path":  "tools/_diag_grid_src.py"
+                  },
+                  {
+                      "sha256":  "bb46e12c01e7706f18e5e2d4aae25128f359b1000b858986e6f5569dea768f33",
+                      "path":  "tools/_fix_2d_grid.py"
+                  },
+                  {
+                      "sha256":  "126b74dad3562a521fa65b2e532deaaa74928ee5c727a1b858359affa1553bc7",
+                      "path":  "tools/_fix_grid_forward.py"
+                  },
+                  {
+                      "sha256":  "350a32244795709515004a5c61ef4dd1b5b2cc9906d1a70df2501d2820d1de5e",
+                      "path":  "tools/_fix_mhq7d_grid.py"
+                  },
+                  {
+                      "sha256":  "47f647ef36a9ecbb086974d3178e7297aa136428991328750bda5ca012eb7832",
+                      "path":  "tools/_fix_phantom_import.py"
+                  },
+                  {
+                      "sha256":  "851d3c0d3ba7d377b12cae41716dd39f6f44198b12e2c597ab06f5cd47dc979b",
+                      "path":  "tools/_fix_sibling_imports.py"
+                  },
+                  {
+                      "sha256":  "7c75ce7499794e727c851da3445477b05c0d4ac202b3d9b723641a79fd940414",
+                      "path":  "tools/_grid_stress.py"
+                  },
+                  {
+                      "sha256":  "970f5bda6b0ba0aeae5fa59c3fe0b36e71c1f2d4aec47d7bba5479c7008d14f1",
+                      "path":  "tools/_import_controls.py"
+                  },
+                  {
+                      "sha256":  "00294306fd072a1862da57b7b32e8785f6dd4802dc66273d6f4b4df769ecfadd",
+                      "path":  "tools/_import_matrix.py"
+                  },
+                  {
+                      "sha256":  "9b02231790e109e259d5fb902a4494be1acf6f979dc1cbf8dafb909df8d5e19e",
+                      "path":  "tools/_loader_requirements.py"
+                  },
+                  {
+                      "sha256":  "082acfa4617ddefc4f4294b2c9a0bcfc1d3f663d9c88e58aad2ad5ff47b787e5",
+                      "path":  "tools/_normalize_eol.py"
+                  },
+                  {
+                      "sha256":  "18a36182ec6ba81184cb3960fa0595ffd86a58da8a358d3cc5d93de5568bc4a0",
+                      "path":  "tools/_offline_controls.py"
+                  },
+                  {
+                      "sha256":  "82f0ebbfb4d94ad62a8a4ca1c769294b15b15a4d5d4c31655ed07afeb71ee4da",
+                      "path":  "tools/_patchers/_patch_audit.py"
+                  },
+                  {
+                      "sha256":  "4eff238ca19da93c647816e60e7af8a1712233b96d400b5134f8db82cd9750b9",
+                      "path":  "tools/_patchers/_patch_audit_root.py"
+                  },
+                  {
+                      "sha256":  "8a58904ec7cabe50eba81f3d1b5e0a6fa1c7b1ef07776ef32f79815724947329",
+                      "path":  "tools/_patchers/_patch_expect_strings.py"
+                  },
+                  {
+                      "sha256":  "5481c92f9749031b52d89102cd0001bbc216e993daea05cc094412db2648af08",
+                      "path":  "tools/_patchers/_patch_gitignore_order.py"
+                  },
+                  {
+                      "sha256":  "21367c90106803d38a026c5db6f684d91f045911ac13bc72590492562a1e778c",
+                      "path":  "tools/_patchers/_patch_loader_audit.py"
+                  },
+                  {
+                      "sha256":  "846d3ba57c98a88eb18b408219e5c05168225ff52a810ba93efdaeb72971bc5f",
+                      "path":  "tools/_patchers/_patch_loader_audit2.py"
+                  },
+                  {
+                      "sha256":  "fde4ae32528a88806a29fcb598167c8a2df4354e971a626f4ba292cd462c1143",
+                      "path":  "tools/_patchers/_patch_loader_reqs.py"
+                  },
+                  {
+                      "sha256":  "5f307b96f8a47e620718fa4682c0d4fa20b8df792e31c30f92dcaf17e3475f6b",
+                      "path":  "tools/_patchers/_patch_reproduce_triage.py"
+                  },
+                  {
+                      "sha256":  "78c893ecc6e5d1381aff8f5124079b6fbc2830344b2bab5d17e6a126658d09ad",
+                      "path":  "tools/_patchers/_patch_vacuity_allow.py"
+                  },
+                  {
+                      "sha256":  "b83dc7c7411398c5d0c093610e0dafb8363e9055caa3807580d11fd02a12626f",
+                      "path":  "tools/_patchers/_patch_verify_all_vacuity.py"
+                  },
+                  {
+                      "sha256":  "142239cb9a2fa0084e8eea2810747ecf7b97da0b5dc0b719cff78091bbd82caa",
+                      "path":  "tools/_patchers/_refresh_pyc.py"
+                  },
+                  {
+                      "sha256":  "041e725c4ea31174fce4311a2a7944a1f84ef2aff8e0f989f51a2c3e3eef819f",
+                      "path":  "tools/_phantom_imports.py"
+                  },
+                  {
+                      "sha256":  "111a8c70997df0280d225c2efa60606c85fa066692e2a5d34d84a85ab67779a0",
+                      "path":  "tools/_self_test.py"
+                  },
+                  {
+                      "sha256":  "10de7742e0ce5dcdb026d50e90b4adec996c59be88c8c02cfb402dc08efa521f",
+                      "path":  "tools/_static_audit.py"
+                  },
+                  {
+                      "sha256":  "6b955237791b625c4ff1191464e1bdcc794e2191ee36a990c38bafdbfce0c1d7",
+                      "path":  "tools/_trace_grid.py"
+                  },
+                  {
+                      "sha256":  "8240d33975644b3fce9d92ffd6652b92025c434c61447ea74d65b51eab408738",
+                      "path":  "tools/_tree_gate.py"
+                  },
+                  {
+                      "sha256":  "bf76d96c4b5b32cf6fa078cad7cb1b878dcdd4d159ac632ee22c6dd343b25a85",
+                      "path":  "tools/_vacuity_audit.py"
+                  },
+                  {
+                      "sha256":  "f3b71c2ce3ae9671de0e3b24fb5716df9c84bb21b0647b99b5dcfe445a3064ff",
+                      "path":  "tools/_why_mirror_differs.py"
+                  },
+                  {
+                      "sha256":  "0e7f6148172a0177cc323bb24c96aed97998c7abedf35a769ef1182f804ffc75",
+                      "path":  "tools/diagnose_quantum_grid.py"
+                  },
+                  {
+                      "sha256":  "9033f3162a25930351e384beff7a4ad60c35c90b8293fb358a342b02a69ae270",
+                      "path":  "tools/repro.cmd"
+                  },
+                  {
+                      "sha256":  "a2329917d1085e51b2984e3c259aa9a503c4b90efd6143c722e04612d7a53f5a",
+                      "path":  "tools/verify_all.py"
+                  },
+                  {
+                      "sha256":  "bceee92a0c9d8f7702106955fbe86d4ba259ef3d8d13e7d28499a5cdb7effaa3",
+                      "path":  "tools/verify_gitignore.py"
+                  },
+                  {
+                      "sha256":  "e1f17d90ecf4d1163b8299e0ca0f9877c9752c6ff03c0ded4d12c4f4fd2ee669",
+                      "path":  "tools/verify_kernel_math.py"
+                  },
+                  {
+                      "sha256":  "51104268471f737349f08eff436e0e7b22b9d50fb6d47052bb80c93f781f311e",
+                      "path":  "tools/verify_kernel_math_quantum.py"
+                  },
+                  {
+                      "sha256":  "b5e3cd042f834b11d10e5d73bca4b46fc6b59e7805f2203c50c45892d4e72000",
+                      "path":  "tools/verify_manifest.py"
+                  },
+                  {
+                      "sha256":  "73cdb4f546e4a8beabe5d2bbf1d5b3dfb2e8bee96727a247ed82d44a62143256",
+                      "path":  "tools/verify_offline.py"
+                  }
+              ]
+}
